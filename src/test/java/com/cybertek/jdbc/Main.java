@@ -5,7 +5,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         //Replace the IP with your own IP address
-        String connectionStr = "jdbc:oracle:thin:@52.71.242.164:1521:XE";
+        String connectionStr = "jdbc:oracle:thin:@54.157.173.68:1521:XE";
         String username = "hr";
         String password = "hr";
 
@@ -29,6 +29,21 @@ public class Main {
         System.out.println("First column value " + rs.getString(1) + " or " + rs.getString("REGION_ID") );
         System.out.println("SECOND column value " + rs.getString(2) + " or " + rs.getString("REGION_NAME") );
         // test branch
+        System.out.println("rs.next() = " + rs.next());
+
+        System.out.println("Third COLUMN VALUE rs.getString(1) = " + rs.getString(1));
+        System.out.println(" THIRD COLUMN VALUE rs.getString(2) = " + rs.getString(2));
+
+        System.out.println("rs.getString(\"region_id\") = " + rs.getString("region_name"));
+
+        System.out.println("rs.next() = " + rs.next());
+
+        System.out.println("rs.getString(1) = " + rs.getString(1));
+        System.out.println("rs.getString(\"region_name\") = " + rs.getString("region_name"));
+        System.out.println("rs.getString(\"region_name\") = " + rs.getString("region_name"));
+
+        System.out.println("rs.next() = " + rs.next());
+
 
     }
 }
