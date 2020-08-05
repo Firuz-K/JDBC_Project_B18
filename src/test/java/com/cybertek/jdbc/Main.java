@@ -1,4 +1,6 @@
 package com.cybertek.jdbc;
+import com.cybertek.jdbc.day2.DB_Utility;
+
 import java.sql.*;
 
 public class Main {
@@ -44,6 +46,7 @@ public class Main {
 
         System.out.println("rs.next() = " + rs.next());
 
+        DB_Utility.destroy();
 
     }
 }
