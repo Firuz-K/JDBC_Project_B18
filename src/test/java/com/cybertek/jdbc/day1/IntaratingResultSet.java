@@ -30,6 +30,10 @@ public class IntaratingResultSet {
 
 
        */
+
+        rs.close();
+        stmt.close();
+        conn.close();
     }
 
 

@@ -22,6 +22,10 @@ public class test {
             System.out.println("Last_name) = " + rs.getString("last_name"));
         }
 
+        rs.close();
+        stmt.close();
+        conn.close();
+
 
 
     }

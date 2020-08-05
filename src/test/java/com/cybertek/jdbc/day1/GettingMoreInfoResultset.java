@@ -44,5 +44,9 @@ public class GettingMoreInfoResultset {
 
         System.out.println("columnNamelist = " + columnNamelist);
 
+        rs.close();
+        stmt.close();
+        conn.close();
+
     }
 }
