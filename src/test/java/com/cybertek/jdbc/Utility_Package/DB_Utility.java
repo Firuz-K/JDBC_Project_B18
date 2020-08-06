@@ -1,11 +1,10 @@
-package com.cybertek.jdbc.day2;
+package com.cybertek.jdbc.Utility_Package;
 
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class DB_Utility {
+public  class DB_Utility {
 
     /*
     * a  static method to create a connection
@@ -23,9 +22,9 @@ public class DB_Utility {
 
 
 
-    public static void createConnection(){
+  public static void createConnection(){
 
-        String connectionStr = "jdbc:oracle:thin:@54.157.173.68:1521:XE";
+       String connectionStr = "jdbc:oracle:thin:@54.157.173.68:1521:XE";
         String username = "hr";
         String password = "hr";
         try {
@@ -36,6 +35,36 @@ public class DB_Utility {
             e.printStackTrace();
         }
     }
+
+
+
+    public static void createConnection(String url, String username,String password){
+
+         url = ConfigurationReader.getProperty("database.URL");
+         username = ConfigurationReader.getProperty("database.username");
+          password = ConfigurationReader.getProperty("database.password");
+
+
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            System.out.println("CONNECTION SUCCESSFUL");
+        }catch (SQLException e){
+            System.out.println("CONNECTION HAS FAILED !!!");
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public static void createConnection(String environment){
+
+        String connectionStr = ConfigurationReader.getProperty(environment+".database.URL");
+        String username = ConfigurationReader.getProperty(environment+".database.username");
+        String password = ConfigurationReader.getProperty(environment+".database.password");
+
+       createConnection(connectionStr,username,password);
+    }
+
 
     /*
      * a static method to get the ResultSet and object
@@ -57,21 +86,25 @@ public class DB_Utility {
 
      */
 
-    public static int getColumnCount(){
-        int columncount =0;
+    public static int getColumnCNT() {
+
+        int colCount = 0;
+
         try {
-             rsmd = rs.getMetaData();
-             columncount = rsmd.getColumnCount();
-        } catch (SQLException throwables) {
-            System.out.println("Error counting columns");
-            throwables.printStackTrace();
+            ResultSetMetaData rsmd = rs.getMetaData();
+            colCount = rsmd.getColumnCount();
+
+        } catch (SQLException e) {
+            System.out.println("ERROR WHILE COUNTING THE COLUMNS");
+            e.printStackTrace();
         }
 
-       return  columncount;
+        return colCount;
     }
 
+
     public static void displayAllData(){
-        int colCount = DB_Utility.getColumnCount();
+        int colCount = DB_Utility.getColumnCNT();
         try {
             rs.beforeFirst();
         while(rs.next()) {
@@ -140,7 +173,7 @@ public class DB_Utility {
 
         try {
             rs.absolute(rowNum);
-            for(int i =1; i<=getColumnCount(); i++){
+            for(int i =1; i<=getColumnCNT(); i++){
                 RowDataList.add(rs.getString(i));
             }
             rs.beforeFirst();
@@ -185,6 +218,7 @@ public class DB_Utility {
             throwables.printStackTrace();
         }
 
+        //System.out.println(columnDataLst);
         return columnDataLst;
     }
 
@@ -227,6 +261,42 @@ public class DB_Utility {
         }
     }
 
+
+    public static Map<String,String> getRowMap( int rowNum ){
+
+        Map<String,String> rowMap = new LinkedHashMap<>();
+        try{
+
+            rs.absolute(rowNum);
+
+            ResultSetMetaData rsmd = rs.getMetaData();
+            for (int colNum = 1; colNum <= getColumnCNT() ; colNum++) {
+                String colName = rsmd.getColumnName( colNum );
+                String colValue= rs.getString( colNum ) ;
+                rowMap.put(colName, colValue);
+            }
+            rs.beforeFirst();
+
+        }catch (SQLException e){
+            System.out.println("ERRROR AT ROW MAP FUNCTION");
+        }
+
+        return rowMap;
+    }
+
+    /**
+     *
+     * @return The entire resultset as List of Row Map
+     */
+    public static List<Map<String,String>> getAllDataAsListOfMap(){
+
+        List<Map<String,String> > rowMapList = new ArrayList<>();
+        for (int i = 1; i <= getRowCount(); i++) {
+            rowMapList.add(   getRowMap(i)    ) ;
+        }
+        return rowMapList ;
+
+    }
 
 
 

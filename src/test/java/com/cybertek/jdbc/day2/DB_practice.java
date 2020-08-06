@@ -1,5 +1,7 @@
 package com.cybertek.jdbc.day2;
 
+import com.cybertek.jdbc.Utility_Package.DB_Utility;
+
 import java.sql.*;
 
 
@@ -16,7 +18,7 @@ public class DB_practice {
 
         System.out.println("rs.getString(\"first_name\") = " + rs.getString(1));
 
-        System.out.println("Column Count " + DB_Utility.getColumnCount());
+        System.out.println("Column Count " + DB_Utility.getColumnCNT());
 
         System.out.println("--------------------------------------------");
 

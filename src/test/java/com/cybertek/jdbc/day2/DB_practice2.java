@@ -1,8 +1,9 @@
 package com.cybertek.jdbc.day2;
 
 
+import com.cybertek.jdbc.Utility_Package.DB_Utility;
+
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class DB_practice2 {
@@ -16,14 +17,9 @@ public class DB_practice2 {
         //DB_Utility.runQuery("select * from employees where salary>19000");
        // DB_Utility.displayAllData();
 
-      System.out.println("DB_Utility.getColumnDataAtRow(3,2) = " + DB_Utility.getColumnDataAtRow(3, 2));
 
-        System.out.println(DB_Utility.getColumnDataAtRow(2,"first_name"));
-
-
-        System.out.println("DB_Utility.getColumnDataAsList(2) = " + DB_Utility.getColumnDataAsList(2));
+        System.out.println("DB_Utility.getRowDataAslList(2) = " + DB_Utility.getRowDataAslList(2));
 
 
-        DB_Utility.destroy();
     }
 }
