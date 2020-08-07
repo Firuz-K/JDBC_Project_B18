@@ -255,6 +255,7 @@ public  class DB_Utility {
             if (conn != null) {
                 conn.close();
             }
+            System.out.println("SESSION DISCONNECTED");
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to close database connection!");

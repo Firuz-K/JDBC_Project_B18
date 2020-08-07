@@ -1,6 +1,12 @@
 package com.cybertek.jdbc.Test;
 
+
+
+
 import com.cybertek.jdbc.Utility_Package.DB_Utility;
+
+import static com.cybertek.jdbc.Utility_Package.DB_Utility.*;
+
 
 import java.sql.*;
 
@@ -8,21 +14,17 @@ public class test1 {
 
     public static void main(String[] args) throws SQLException {
 
-        DB_Utility.createConnection();
+        createConnection();
 
-        ResultSet rs =UtilityPractice.runQuery("Select * from countries");
+       runQuery("Select * from countries");
 
-        rs.next();
+        System.out.println(getColumnCNT());
 
-        System.out.println("UtilityPractice.columnCount() = " + UtilityPractice.columnCount());
+        destroy();
 
-       // UtilityPractice.displayAllData();
-        //UtilityPractice.getColumnDataAtRow(1,2);
-       // UtilityPractice.getColumnDataAtRow(4,"country_name");
 
-       UtilityPractice.getRowDataAslList(2);
 
-        DB_Utility.destroy();
+
 
 
 

@@ -1,7 +1,6 @@
 package com.cybertek.jdbc.Day3SPartanDBPractice;
 
-import com.cybertek.jdbc.Utility_Package.ConfigurationReader;
-import com.cybertek.jdbc.Utility_Package.DB_Utility;
+
 import static com.cybertek.jdbc.Utility_Package.DB_Utility.*;
 
 import java.sql.*;
@@ -15,7 +14,9 @@ public class SpartanDB_Practice {
 
        runQuery("select * from spartans");
 
-        System.out.println(getColumnDataAsList(2));
+        System.out.println(getColumnDataAsList("name"));
+
+        destroy();
 
 
     }
